@@ -37,5 +37,6 @@ docker-compose stop
 Pour reconstruire le projet, utilisez la commande suivante à la racine :
 ```bash
 docker-compose down
+docker-compose up --build
 ```
 
