@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  web-api:
+    build: .
+    container_name: web-api
+    volumes:
+      - ./:/web-api
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+  db:
+    build:
+      context: ./docker/db
+      dockerfile: Dockerfile
+    container_name: mariadb-database
