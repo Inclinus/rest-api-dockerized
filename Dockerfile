@@ -25,9 +25,6 @@ COPY docker/web-conf/apache.conf /etc/apache2/conf-available/web-api.conf
 
 # Dossiers
 COPY public /web-api/public
-COPY services /web-api/services
-COPY libraries /web-api/libraries
-COPY database /web-api/database
 
 RUN a2enmod rewrite remoteip && \
     a2enconf web-api

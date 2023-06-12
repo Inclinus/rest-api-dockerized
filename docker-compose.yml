@@ -13,4 +13,6 @@ services:
     build:
       context: ./docker/db
       dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
     container_name: mariadb-database
