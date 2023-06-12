@@ -20,4 +20,12 @@ if(isPath("users")){
     }
 }
 
+/**
+ * MIGRATION ENDPOINT
+ */
+if(isPath("migration") && isGetMethod()){
+    require_once __DIR__ . '/database/migration.php';
+    die();
+}
+
 jsonResponse(404, [],"");
