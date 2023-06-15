@@ -1,18 +1,30 @@
 <?php
-
-function getAuthorizationBearerToken()
+function getAuthorizationBearerToken(): string
 {
-  $headers = getallheaders();
+    $headers = getallheaders();
 
-  if (!isset($headers["Authorization"])) {
-    return null;
-  }
+    if (!isset($headers["Authorization"])) {
+        throw new Exception("Authorization header is missing");
+    }
 
-  $explodedAuthorizationHeader = explode(" ", $headers["Authorization"]);
+    $authorizationHeader = $headers["Authorization"];
+    $authorizationHeaderParts = explode(" ", $authorizationHeader);
+    $authorizationHeaderPartsCount = count($authorizationHeaderParts);
 
-  if (!isset($explodedAuthorizationHeader[1])) {
-    return null;
-  }
+    if ($authorizationHeaderPartsCount !== 2) {
+        throw new Exception("Authorization header is not correctly set");
+    }
 
-  return $explodedAuthorizationHeader[1];
+    $authorizationHeaderType = $authorizationHeaderParts[0];
+    $authorizationHeaderToken = $authorizationHeaderParts[1];
+
+    if ($authorizationHeaderType !== "Bearer") {
+        throw new Exception("Authorization header type should be Bearer");
+    }
+
+    if (!$authorizationHeaderToken) {
+        throw new Exception("Authorization header token is missing");
+    }
+
+    return $authorizationHeaderToken;
 }
